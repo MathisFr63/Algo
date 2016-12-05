@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include"typechar.h"
+
+void maj(void){
+  char carac,caracM
+  printf("saisir un unique caractère en minuscule : \n");
+  carac=getchar();
+  printf("le caractère lu est :%c\n",carac);
+  printf("la valeur ASCII correspondante est : %d\n",carac);
+  caracM=carac-32;
+  printf("le caractère en majuscule correspondant est : %c de valeur ASCII : %d\n",caracM)
+}

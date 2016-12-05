@@ -1,0 +1,7 @@
+#include"location.h"
+int main(void){
+  // location();
+  // aperitif();
+  banquet();
+  return 0;
+}

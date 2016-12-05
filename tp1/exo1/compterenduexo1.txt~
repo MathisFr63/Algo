@@ -1,0 +1,48 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+
+bonjour.h
+
+void affichBonjour(void);
+void affichBonjour1(void);
+
+bonjour.c
+
+#include <stdio.h>
+#include"bonjour.h"
+
+/*programme: bonjour.c
+auteur : FRIZOT Mathis PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher bonjour à l'écran
+*/
+
+void affichBonjour(void){
+  printf("Bonjour\n");
+  
+}
+
+void affichBonjour1(void){
+  int annee;
+  printf("Année en cours : ");
+  scanf("%d",&annee);
+  printf("Bonjour %d\n",annee);
+  
+}
+
+testbonjour.c
+
+#include"bonjour.h"
+
+
+int main(void){
+  // affichBonjour();
+  affichBonjour1() ;
+  return 0;
+}
+
+Essai
+
+mafrizot1@a12-158:~/algo/tp1/exo1$ gcc *.c -o bonjour1
+mafrizot1@a12-158:~/algo/tp1/exo1$ ./bonjour1
+Année en cours : 2016 
+Bonjour 2016

@@ -1,0 +1,274 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo G6
+
+
+EXERCICE 1 
+
+bonjour.h
+
+void affichBonjour(void);
+void affichBonjour1(void);
+
+bonjour.c
+
+#include <stdio.h>
+#include"bonjour.h"
+
+/*programme: bonjour.c
+auteur : FRIZOT Mathis PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher bonjour à l'écran
+*/
+
+void affichBonjour(void){
+  printf("Bonjour\n");
+  
+}
+
+void affichBonjour1(void){
+  int annee;
+  printf("Année en cours : ");
+  scanf("%d",&annee);
+  printf("Bonjour %d\n",annee);
+  
+}
+
+testbonjour.c
+
+#include"bonjour.h"
+
+
+int main(void){
+  // affichBonjour();
+  affichBonjour1() ;
+  return 0;
+}
+
+Essai
+
+mafrizot1@a12-158:~/algo/tp1/exo1$ gcc *.c -o bonjour1
+mafrizot1@a12-158:~/algo/tp1/exo1$ ./bonjour1
+Année en cours : 2016 
+Bonjour 2016
+
+
+EXERCICE 2
+
+reduction.h
+
+void reduction(void);
+
+reduction.c
+
+#include <stdio.h>
+#include"reduction.h"
+
+/*programme: reduction.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix d'une marchandise arpès réduction
+*/
+
+void reduction(void){
+  float prix, pourcent, prixreduc;
+  printf("prix : ");
+  scanf("%f",&prix);
+  printf("pourcentage de réduction : ");
+  scanf("%f",&pourcent);
+  prixreduc=prix-prix*(pourcent/100);
+  printf("prix après réduction : %.2f\n",prixreduc);
+}
+
+testreduction.c
+
+#include"reduction.h"
+int main(void){
+  reduction();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 10
+prix après réduction : 4.50
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 100
+prix après réduction : 0.00
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 0
+pourcentage de réduction : 10
+prix après réduction : 0.00
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 0
+prix après réduction : 5.00 
+
+
+EXERCICE 3
+
+vien.h
+
+void vien(void);
+
+vien.c
+
+#include <stdio.h>
+#include"vien.h"
+
+/*programme: vien.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix et le nombre de viennoiseries
+*/
+
+void vien(void){
+  int nVienD,nVienT;
+  float prix;
+  printf("nombre de viennoiseries : ");
+  scanf("%d",&nVienD);
+  prix=(2*(nVienD/5))+(0.5*(nVienD%5));
+  nVienT=nVienD+(nVienD/12);
+  printf("prix à payer : %.2f\n",prix);
+  printf("nombre de viennoiseries totales : %d\n",nVienT);
+}
+
+testvien.c
+
+#include"vien.h"
+int main(void){
+  vien();
+  return 0;
+}
+
+ Essai
+ 
+mafrizot1@a12-158:~/algo/tp1/exo3$ gcc *.c -o vien
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 3
+prix à payer : 1.50
+nombre de viennoiseries totales : 3
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 5
+prix à payer : 2.00
+nombre de viennoiseries totales : 5
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 6
+prix à payer : 2.50
+nombre de viennoiseries totales : 6
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 13
+prix à payer : 5.50
+nombre de viennoiseries totales : 14
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 24
+prix à payer : 10.00
+nombre de viennoiseries totales : 26
+
+
+EXERCICE 4
+
+typechar.h
+
+void typechar(void);
+
+typechar.c
+
+#include <stdio.h>
+#include"typechar.h"
+
+void typechar(void){
+  char carac;
+  printf("saisir un unique caractère en minuscule : \n");
+  carac=getchar();
+  printf("le caractère lu est :%c\n",carac);
+  printf("la valeur ASCII correspondante est : %d\n",carac);
+}
+
+testtypechar.c$
+
+#include"typechar.h"
+int main(void){
+  typechar();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a19-131:~/algo/tp1/exo4$ gcc *.c -o typechar
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+h
+le caractère lu est :h
+la valeur ASCII correspondante est : 104
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+s
+le caractère lu est :s
+la valeur ASCII correspondante est : 115
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+H
+le caractère lu est :H
+la valeur ASCII correspondante est : 72
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+S
+le caractère lu est :S
+la valeur ASCII correspondante est : 83
+
+Que remarque-t-on?
+On remarque que la valeur ASCII entre la minuscule et la majuscule d'une même lettre est différente (différence constante de 32).
+
+
+EXERCICE 5
+
+maj.h
+
+void maj(void);
+
+maj.c
+
+#include <stdio.h>
+#include"maj.h"
+
+/*programme: maj.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : obtenir la majuscule et sa valeur ASCII correspondante d'une lettre minuscule
+*/
+
+void maj(void){
+  char carac,caracM;
+  printf("saisir un unique caractère en minuscule : \n");
+  carac=getchar();
+  printf("le caractère lu est :%c\n",carac);
+  printf("la valeur ASCII correspondante est : %d\n",carac);
+  caracM=carac-32;
+  printf("le caractère en majuscule correspondant est : %c de valeur ASCII : %d\n",caracM,caracM);
+}
+
+testmaj.c
+
+#include"maj.h"
+int main(void){
+  maj();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a19-131:~/algo/tp1/exo5$ ./maj
+saisir un unique caractère en minuscule : 
+f
+le caractère lu est :f
+la valeur ASCII correspondante est : 102
+le caractère en majuscule correspondant est : F de valeur ASCII : 70
+mafrizot1@a19-131:~/algo/tp1/exo5$ 
+mafrizot1@a19-131:~/algo/tp1/exo5$ ./maj
+saisir un unique caractère en minuscule : 
+c
+le caractère lu est :c
+la valeur ASCII correspondante est : 99
+le caractère en majuscule correspondant est : C de valeur ASCII : 67

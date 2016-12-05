@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include"reduction.h"
+
+/*programme: reduction.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix d'une marchandise arpès réduction
+*/
+
+void reduction(void){
+  float prix, pourcent, prixreduc;
+  printf("prix : ");
+  scanf("%f",&prix);
+  printf("pourcentage de réduction : ");
+  scanf("%f",&pourcent);
+  prixreduc=prix-prix*(pourcent/100);
+  printf("prix après réduction : %.2f\n",prixreduc);
+}

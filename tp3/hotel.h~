@@ -1,0 +1,3 @@
+void hotel(void);
+float coutsalle(char cate,char deco);
+void affcout(float cout,char cate, char deco);

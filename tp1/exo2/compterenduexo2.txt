@@ -1,0 +1,53 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo G6
+
+reduction.h
+
+void reduction(void);
+
+reduction.c
+
+#include <stdio.h>
+#include"reduction.h"
+
+/*programme: reduction.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix d'une marchandise arpès réduction
+*/
+
+void reduction(void){
+  float prix, pourcent, prixreduc;
+  printf("prix : ");
+  scanf("%f",&prix);
+  printf("pourcentage de réduction : ");
+  scanf("%f",&pourcent);
+  prixreduc=prix-prix*(pourcent/100);
+  printf("prix après réduction : %.2f\n",prixreduc);
+}
+
+testreduction.c
+
+#include"reduction.h"
+int main(void){
+  reduction();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 10
+prix après réduction : 4.50
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 100
+prix après réduction : 0.00
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 0
+pourcentage de réduction : 10
+prix après réduction : 0.00
+mafrizot1@a12-158:~/algo/tp1/exo2$ ./reduction
+prix : 5
+pourcentage de réduction : 0
+prix après réduction : 5.00 

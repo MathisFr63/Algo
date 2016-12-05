@@ -1,0 +1,1 @@
+void reduction(void);

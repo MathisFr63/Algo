@@ -1,0 +1,3 @@
+algo1 4 algorithmique période 1
+maths 2 mathématiques
+algo2 1 algorithmique période 2

@@ -1,0 +1,21 @@
+void hotel(void){
+  
+}
+
+void coutsalle(char cate, char deco){
+
+}
+
+char saisiecate(void){
+  char categorie;
+  printf("Catégorie de la salle (A/B/C) :");
+  scanf("%c%*c",&categorie);
+  return categorie;
+}
+
+char saisiedeco(void){
+  char decoration;
+  printf("Decoration (O/N) :");
+  scanf("%c%*c",&decoration);
+  return decoration;
+}

@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include"vien.h"
+
+/*programme: vien.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix et le nombre de viennoiseries
+*/
+
+void vien(void){
+  int nVienD,nVienT;
+  float prix;
+  printf("nombre de viennoiseries : ");
+  scanf("%d",&nVienD);
+  prix=(2*(nVienD/5))+(0.5*(nVienD%5));
+  nVienT=nVienD+(nVienD/12);
+  printf("prix à payer : %.2f\n",prix);
+  printf("nombre de viennoiseries totales : %d\n",nVienT);
+  

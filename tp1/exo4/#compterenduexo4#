@@ -1,0 +1,59 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo G6
+
+typechar.h
+
+void typechar(void);
+
+typechar.c
+
+#include <stdio.h>
+#include"typechar.h"
+
+/*programme: typechar.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : obtenir la valeur ASCII d'une lettre
+*/
+
+void typechar(void){
+  char carac;
+  printf("saisir un unique caractère en minuscule : \n");
+  carac=getchar();
+  printf("le caractère lu est :%c\n",carac);
+  printf("la valeur ASCII correspondante est : %d\n",carac);
+}
+
+testtypechar.c$
+
+#include"typechar.h"
+int main(void){
+  typechar();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a19-131:~/algo/tp1/exo4$ gcc *.c -o typechar
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+h
+le caractère lu est :h
+la valeur ASCII correspondante est : 104
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+s
+le caractère lu est :s
+la valeur ASCII correspondante est : 115
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+H
+le caractère lu est :H
+la valeur ASCII correspondante est : 72
+mafrizot1@a19-131:~/algo/tp1/exo4$ ./typechar
+saisir un unique caractère en minuscule : 
+S
+le caractère lu est :S
+la valeur ASCII correspondante est : 83
+
+Que remarque-t-on?
+On remarque que la valeur ASCII entre la minuscule et la majuscule d'une même lettre est différente (différence constante de 32).

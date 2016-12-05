@@ -1,0 +1,59 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo G6
+
+vien.h
+
+void vien(void);
+
+vien.c
+
+#include <stdio.h>
+#include"vien.h"
+
+/*programme: vien.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : afficher le prix et le nombre de viennoiseries
+*/
+
+void vien(void){
+  int nVienD,nVienT;
+  float prix;
+  printf("nombre de viennoiseries : ");
+  scanf("%d",&nVienD);
+  prix=(2*(nVienD/5))+(0.5*(nVienD%5));
+  nVienT=nVienD+(nVienD/12);
+  printf("prix à payer : %.2f\n",prix);
+  printf("nombre de viennoiseries totales : %d\n",nVienT);
+}
+
+testvien.c
+
+#include"vien.h"
+int main(void){
+  vien();
+  return 0;
+}
+
+ Essai
+ 
+mafrizot1@a12-158:~/algo/tp1/exo3$ gcc *.c -o vien
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 3
+prix à payer : 1.50
+nombre de viennoiseries totales : 3
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 5
+prix à payer : 2.00
+nombre de viennoiseries totales : 5
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 6
+prix à payer : 2.50
+nombre de viennoiseries totales : 6
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 13
+prix à payer : 5.50
+nombre de viennoiseries totales : 14
+mafrizot1@a12-158:~/algo/tp1/exo3$ ./vien
+nombre de viennoiseries : 24
+prix à payer : 10.00
+nombre de viennoiseries totales : 26

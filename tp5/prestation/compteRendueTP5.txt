@@ -1,0 +1,198 @@
+FRIZOT Mathis PEREIRA AUGUSTO Bernardo G6
+
+-------------------------------------------------------------------------------------------------------------
+EXO 1
+-------------------------------------------------------------------------------------------------------------
+multi.h
+
+void tableMult(int m);
+int entierDe1A9(void);
+void globale(void);
+
+-------------------------------------------------------------------------------------------------------------
+
+multi.c
+
+#include <stdio.h>
+#include"multi.h"
+
+
+/*programme : multi.c
+auteur: Mathis FRIZOT Bernardo PEREIRA AUGUSTO
+date : 07/10/2016
+finalité: Afficher une table de multiplication
+*/
+
+
+/* Nom : tableMult
+Finalité : affiche la table de multiplication pour le nombre m
+Paramètres entrant: m, nombre dont on veut la table de multiplication
+Paramètres entrant-sortant: Aucun
+Valeur retourné: Aucune
+Variables :
+	i, multiplicateur de 1 à 9
+*/
+
+void tableMult(int m){
+	int i=1;
+	printf("Table de multiplication par %d\n",m);
+	while (i <= 9){int main(void){
+	globale();
+	return 0;
+}
+
+		printf("%d*%d = %d\n",m,i,m*i);
+		i++;
+	}
+}
+
+/* Nom : entierDe1A9
+Finalité : retourne l'entier dont on veut la table de multiplication
+Paramètres entrant: Aucun
+Paramètres entrant-sortant: Aucune
+Valeur retourné: entier
+Variables :
+	entier, entier dont on veut la table de multiplication
+*/
+	
+int entierDe1A9(void){
+	int entier;
+	printf("Taper un entier compris entre 1 et 9 :");
+	scanf("%d",&entier);
+	while (entier<1 || entier>9){
+		printf("La valeur doit être comprise entre 1 et 9; retaper :");
+		scanf("%d",&entier);
+	}
+	return entier;
+}
+
+/* Nom : globale
+Finalité : appel des autres fonctions pour afficger la table de multiplication
+Paramètres entrant: Aucun
+Paramètres entrant-sortant: Aucun
+Valeur retourné: Aucune
+Variables :
+	m, entier dont on veut la table de multiplication
+*/
+
+void globale(void){
+	int m;
+	m=entierDe1A9();
+	tableMult(m);
+}
+
+-------------------------------------------------------------------------------------------------------------
+
+testmulti.c
+
+int main(void){
+	globale();
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------
+EXO 2
+-------------------------------------------------------------------------------------------------------------
+
+prestation.h
+
+void globale(void);
+
+-------------------------------------------------------------------------------------------------------------
+
+prestation.c
+
+#include <stdio.h>
+#include"prestation.h"
+
+/*programme : prestation.c
+auteur: Mathis FRIZOT Bernardo PEREIRA AUGUSTO
+date : 07/10/2016
+finalité: Statistiques de prestations hôtelières
+*/
+
+
+/* Nom : globale
+Finalité : affiche les statistiques de l'hôtel
+Paramètres entrant: Aucun
+Paramètres entrant-sortant: Aucun
+Valeur retourné: Aucune
+Variables :
+	numrecep, Numéro de la réception lu dans le fichier texte
+	n, nombre de réceptions ayant les trois prestations
+	cLoc, coût total d'une réception
+	salle, coût total des locations de salles
+	cMax, coût maximal parmis les réceptions
+	cMoy, moyenne des réceptions qui présentent les trois prestations
+	cSalle, coût d'une salle lu dans le fichier texte
+	cApero, coût d'un apéritif lu dans le fichier texte
+	cBanquet, coût d'un banquet lu dans le fichier texte
+	som, somme des coûts de location des réceptions présentant les trois prestations (afin de faire une moyenne)
+*/
+
+
+void globale(void){
+	FILE *fe;
+	int numrecep,n=0;
+	float cLoc,salle=0,cMax=0,cMoy=0,cSalle,cApero,cBanquet,som=0;
+	
+	
+	fe=fopen("reception.txt","r");
+	if (fe==NULL){
+		printf("Ouverture du fichier impossible\n");
+	}
+	else{
+		fscanf(fe,"%d%f%f%f",&numrecep,&cSalle,&cApero,&cBanquet);
+		while (feof(fe)==0){
+			salle=salle+cSalle;
+			cLoc=cSalle+cApero+cBanquet;
+			if (cLoc>cMax)
+				cMax=cLoc;
+			if (cSalle !=0 && cApero !=0 && cBanquet !=0){
+				cLoc=cSalle+cApero+cBanquet;
+				som=som+cLoc;
+				n++;
+			}
+			fscanf(fe,"%d%f%f%f",&numrecep,&cSalle,&cApero,&cBanquet);
+		}
+		fclose(fe);
+		
+		
+		printf("Le montant total des locations de salle est : %.2f\n",salle);
+		printf("Le coût de la réception la plus coûteuse est : %.2f €\n",cMax); 
+		if (n==0)
+			printf("Aucune réception ne présente les trois prestations\n");
+		else{
+			cMoy=som/n;
+			printf("Le coût moyen des réceptions sui présentent les trois prestations est de : %.2f\n",cMoy);
+		}
+	}
+}
+
+-------------------------------------------------------------------------------------------------------------
+
+testprestation.c
+
+int main(void){
+	globale();
+	return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------
+
+reception.txt
+
+25 1000 500 0
+26 1000 350 620
+27 700 350 620
+28 1500 0 1023
+
+
+Mais on a utiliser reception2.txt pour pouvoir afficher le message d'erreur
+
+reception2.txt
+
+25 1000 500 0
+26 1000 0 620
+27 700 350 0
+28 1500 0 1023

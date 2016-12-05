@@ -1,0 +1,5 @@
+#include"bonjour.h"
+int main(void){
+  affichBonjour() ;
+  return 0;
+}

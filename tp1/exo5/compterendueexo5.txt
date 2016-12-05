@@ -1,0 +1,50 @@
+FRIZOT Mathis et PEREIRA AUGUSTO Bernardo G6
+
+maj.h
+
+void maj(void);
+
+maj.c
+
+#include <stdio.h>
+#include"maj.h"
+
+/*programme: maj.c
+auteur : FRIZOT Mathis et PEREIRA AUGUSTO Bernardo
+date : 09/09/2016
+finalité : obtenir la majuscule et sa valeur ASCII correspondante d'une lettre minuscule
+*/
+
+void maj(void){
+  char carac,caracM;
+  printf("saisir un unique caractère en minuscule : \n");
+  carac=getchar();
+  printf("le caractère lu est :%c\n",carac);
+  printf("la valeur ASCII correspondante est : %d\n",carac);
+  caracM=carac-32;
+  printf("le caractère en majuscule correspondant est : %c de valeur ASCII : %d\n",caracM,caracM);
+}
+
+testmaj.c
+
+#include"maj.h"
+int main(void){
+  maj();
+  return 0;
+}
+
+Essai
+
+mafrizot1@a19-131:~/algo/tp1/exo5$ ./maj
+saisir un unique caractère en minuscule : 
+f
+le caractère lu est :f
+la valeur ASCII correspondante est : 102
+le caractère en majuscule correspondant est : F de valeur ASCII : 70
+mafrizot1@a19-131:~/algo/tp1/exo5$ 
+mafrizot1@a19-131:~/algo/tp1/exo5$ ./maj
+saisir un unique caractère en minuscule : 
+c
+le caractère lu est :c
+la valeur ASCII correspondante est : 99
+le caractère en majuscule correspondant est : C de valeur ASCII : 67

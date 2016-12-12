@@ -1,4 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "tp.h"
+/*programme : tp.c
+auteur: Mathis FRIZOT Bernardo PEREIRA AUGUSTO
+date : 09/12/2016
+finalité: Récusivité
+*/
+
+/* Nom : nbSegment
+Finalité : Calcule du nombre de segments obtenus lorque tout les points d'un cercle sont reliés entre eux
+Paramètres entrant: n,nb de points sur le cercle
+Paramètres entrant-sortant: Aucun
+Valeur retourné: nombre de segments
+Variables : Aucune
+*/
+
 
 int nbSegment(int n){
 	if (n==1)
@@ -39,59 +56,55 @@ int rechMax(int tab[],int n){
 	return res;
 }
 
-int comparaisonint(int tab1[],int tab2[],int n){
-	int i;
-	if(n==1)
-		if(tab1[0]==tab2[0])
-			return 1;
-		else
-			return -1;
-	i=comparaison(tab1,tab2,n-1);
-	if(i<0)
-		return -1;
-	if(tab1[n-1]==tab2[n-1])
-		return 1;
-}
-
-int teststrlen(char mot[],int n){
-	int taille;
-	if(n==1)
-		return 1;
-	taille=teststrlen(mot,n-1);
-	if(mot[n-1]!='\0'){
+int teststrlen(char mot[]){
+	int taille=0;
+	if(mot[0]!='\0'){
+		taille=teststrlen(mot+1);
 		return taille+1;
 	}
-	return taille;
+	else
+		return taille;
 }
 
-void copie(char mot1[],char mot2[],int n){
-	if(n==1){
+void copie(char mot2[],char mot1[]){
+	if(mot1[0]!='\0'){
 		mot2[0]=mot1[0];
-		return;
+		copie(mot2+1,mot1+1);
 	}
-	copie(mot1,mot2,n-1);
-	if(mot1[n-1]=='\0')
-		mot2[n-1]='\0';
-	mot2[n-1]=mot1[n-1];
+	else
+		mot2[0]='\0';
 }
 
-void concat(char tab1[],char tab2[],int n){
-	
+void concat(char tab1[],char tab2[],char tab3[]){
+	if(tab1[0]!='\0'){
+		tab3[0]=tab1[0];
+		concat(tab1+1,tab2,tab3+1);
+	}
+	else if(tab2[0]!='\0'){
+		tab3[0]=tab2[0];
+		concat(tab1+1,tab2+1,tab3+1);
+	}
+	else
+		tab3[0]='\0';
 }
 
-int comparaison(char tab1[],char tab2[],int n){
+int comparaison(char tab1[],char tab2[]){
 	int i;
-	if(n==1)
-		if(tab1[0]==tab2[0])
-			return 1;
-		else
+	if(tab1[0]==tab2[0]){
+		if(tab1[0]!='\0'){
+			i=comparaison(tab1+1,tab2+1);
+			return i;
+		}
+		else{
+			return 0;
+		}
+	}
+	else{
+		if(tab1[0]<tab2[0]){
 			return -1;
-	i=comparaison(tab1,tab2,n-1);
-	if(i<0)
-		return -1;
-	if(tab1[n-1]==tab2[n-1])
-		return 1;
-
-void globale (void){
-
+		}
+		else{
+			return 1;
+		}
+	}
 }

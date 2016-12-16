@@ -3,23 +3,126 @@
 #include <string.h>
 #include "ds.h"
 
-Etudiant lireEtu(FILE* fe){
+Etudiant lireEtu(FILE *fe){
 	Etudiant etu;
-	fget(etu.nom,20,fe);
+	fgets(etu.nom,20,fe);
 	if(etu.nom[strlen(etu.nom)-1]=='\n')
-		etu.nom[strlen(etu.nom)-1]=='\0';
-	fget(etu.prenom,20,fe);
+		etu.nom[strlen(etu.nom)-1]='\0';
+	fgets(etu.prenom,20,fe);
 	if(etu.prenom[strlen(etu.prenom)-1]=='\n')
-		etu.prenom[strlen(etu.prenom)-1]=='\0';
-	fscanf(fe,'%d %d %d',etu.naissance.jour,etu.naissance.mois,etu.naissance.annee);
-	fscanf(fe,'%s',etu.etab);
+		etu.prenom[strlen(etu.prenom)-1]='\0';
+	fscanf(fe,"%d%d%d ",&etu.naissance.jour,&etu.naissance.mois,&etu.naissance.annee);
+	fscanf(fe,"%s ",etu.etab);
+	fscanf(fe,"%s ",etu.c);
 	return etu;
 }
 
-void test (void){
-	Etudiant etu;
-	FILE *fe=fopen("etu.don","r");
+void afficheT(Etudiant etu){
+	printf("%s\t%s\t%d/%d/%d\t\t%s\t\t%s\n",etu.nom,etu.prenom,etu.naissance.jour,etu.naissance.mois,etu.naissance.annee,etu.etab,etu.c);
+}
 
-	etu=lireEtu(fe);
-	printf("nom : %s\nprénom : %s\n Date : %d/%d/%d\n Etablissement : %s",etu.nom,etu.prenom,etu.naissance.jour,etu.naissance.mois,etu.naissance.annee,etu.etab);
+Etudiant *ChargeEtudiants(char * nomFichier,int *nbEt){
+	FILE *fe=fopen(nomFichier,"r");
+	Etudiant * tEtu;
+	int i;
+
+	if(fe==NULL){
+		printf("Erreur lors de l'ouverture du ficher %s !\n",nomFichier);
+		exit(1);
+	}
+
+	fscanf(fe,"%d ",nbEt);
+	tEtu=(Etudiant *)malloc(*nbEt * sizeof(Etudiant));
+	if (tEtu==NULL){
+		printf("Problème de Mémoire !\n");
+		exit(1);
+	}
+	for (i=0;i<*nbEt;i++){
+		tEtu[i]=lireEtu(fe);
+	}
+	fclose(fe);
+	return tEtu;
+}
+
+int nbIUT(Etudiant * tEtu,int nbEt){
+	int nbI;
+	if(nbEt==1){
+		if (strcmp(tEtu[0].etab,"IUT")==0)
+			return 1;
+		else
+			return 0;
+	}
+	if (strcmp(tEtu[nbEt-1].etab,"IUT")==0)
+		nbI++;
+	nbI=nbIUT(tEtu,nbEt-1);
+	return nbI;
+}
+
+void affChamb(Chambre tabChambre[],char bat,char etage,int nbCh){
+	int i;
+
+	for(i=0;i<nbCh;i++){
+		if(tabChambre[i].num[0]==etage && tabChambre[i].num[3]==bat)
+			printf("%s\n",tabChambre[i].num);
+	}
+}
+
+void suppr(char *nom,char *prenom,Chambre tabChambre[],int nbCh,Etudiant tEtu[],int *nbE){
+	int i;
+	char chambre[5];
+
+	for(i=0;i<*nbE;i++){
+		if (strcmp(tEtu[i].nom,nom)==0 && strcmp(tEtu[i].prenom,prenom)==0){
+			strcpy(chambre,tEtu[i].c);
+			for(i;i<*nbE;i++){
+				tEtu[i]=tEtu[i+1];
+			*nbE--;
+			}
+		}
+	}
+	for(i=0;i<nbCh;i++){
+		if (strcmp(tabChambre[i].num,chambre)==0){
+			tabChambre[i].etat=0;
+		}
+	}
+}
+
+void sauveTEtudiants(Etudiant *tEtud,char *nomfich,int nbEt){
+	int i,nb;
+	FILE *fs=fopen(nomfich,"r+b");
+
+	if(fs==NULL){
+		printf("Erreur lors de l'ouverture du fcichier\n");
+		exit(1);
+	}
+
+	fprintf(fs,"%d\n",nbEt);
+	fwrite(tEtud,sizeof(Etudiant),nbEt,fs);
+	printf("nbEt=%d\n",nbEt);
+	fscanf(fs,"%d",&nb);
+	printf("nb =%d\n",nb);
+	for(i=0;i<nbEt;i++){
+		afficheT(tEtud[i]);
+	}
+	fread(tEtud,sizeof(Etudiant),nbEt,fs);
+	fclose(fs);
+}
+
+int charger(Chambre tabChambre[],int max){
+	FILE *fe=fopen("fchambres.don","r");
+	int i=0;
+	Chambre cha;
+	if(fe==NULL){
+		printf("Erreur lors de l'ouverture\n");
+		exit(1);
+	}
+	fscanf(fe,"%d %s",&cha.etat,cha.num);
+	printf("%d ; %s\n",cha.etat,cha.num);
+	while(feof(fe)==0 && i<max){
+		strcpy(tabChambre[i].num,cha.num);
+		tabChambre[i].etat=cha.etat;
+		i++;
+		fscanf(fe,"%d %s",&cha.etat,cha.num);
+	}
+	return i;
 }

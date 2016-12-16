@@ -9,3 +9,5 @@ typedef struct{
 
 
 int chargeFresult(Pays *tpays[], int nbmax);
+int recherche(Pays *tPays[],int nb,char *nom);
+void affiche (Pays **tpays,int nb);

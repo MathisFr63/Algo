@@ -6,5 +6,7 @@ int main(void){
 	int nbPays;
 
 	nbPays=chargeFresult(tpays,100);
+	printf("%d\n",nbPays);
+	affiche(tpays,nbPays);
 	return 0; 
 }

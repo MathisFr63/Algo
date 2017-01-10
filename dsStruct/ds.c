@@ -11,7 +11,7 @@ Etudiant lireEtu(FILE *fe){
 	fgets(etu.prenom,20,fe);
 	if(etu.prenom[strlen(etu.prenom)-1]=='\n')
 		etu.prenom[strlen(etu.prenom)-1]='\0';
-	fscanf(fe,"%d%d%d ",&etu.naissance.jour,&etu.naissance.mois,&etu.naissance.annee);
+	fscanf(fe,"%d%d%d",&etu.naissance.jour,&etu.naissance.mois,&etu.naissance.annee);
 	fscanf(fe,"%s ",etu.etab);
 	fscanf(fe,"%s ",etu.c);
 	return etu;
@@ -69,7 +69,7 @@ void affChamb(Chambre tabChambre[],char bat,char etage,int nbCh){
 
 void suppr(char *nom,char *prenom,Chambre tabChambre[],int nbCh,Etudiant tEtu[],int *nbE){
 	int i;
-	char chambre[5];
+	char *chambre;
 
 	for(i=0;i<*nbE;i++){
 		if (strcmp(tEtu[i].nom,nom)==0 && strcmp(tEtu[i].prenom,prenom)==0){
@@ -88,8 +88,8 @@ void suppr(char *nom,char *prenom,Chambre tabChambre[],int nbCh,Etudiant tEtu[],
 }
 
 void sauveTEtudiants(Etudiant *tEtud,char *nomfich,int nbEt){
-	int i,nb;
-	FILE *fs=fopen(nomfich,"r+b");
+	int i;
+	FILE *fs=fopen(nomfich,"wb");
 
 	if(fs==NULL){
 		printf("Erreur lors de l'ouverture du fcichier\n");
@@ -97,32 +97,8 @@ void sauveTEtudiants(Etudiant *tEtud,char *nomfich,int nbEt){
 	}
 
 	fprintf(fs,"%d\n",nbEt);
-	fwrite(tEtud,sizeof(Etudiant),nbEt,fs);
-	printf("nbEt=%d\n",nbEt);
-	fscanf(fs,"%d",&nb);
-	printf("nb =%d\n",nb);
 	for(i=0;i<nbEt;i++){
-		afficheT(tEtud[i]);
+		fwrite(&tEtud[i],sizeof(Etudiant),1,fs);
 	}
-	fread(tEtud,sizeof(Etudiant),nbEt,fs);
 	fclose(fs);
-}
-
-int charger(Chambre tabChambre[],int max){
-	FILE *fe=fopen("fchambres.don","r");
-	int i=0;
-	Chambre cha;
-	if(fe==NULL){
-		printf("Erreur lors de l'ouverture\n");
-		exit(1);
-	}
-	fscanf(fe,"%d %s",&cha.etat,cha.num);
-	printf("%d ; %s\n",cha.etat,cha.num);
-	while(feof(fe)==0 && i<max){
-		strcpy(tabChambre[i].num,cha.num);
-		tabChambre[i].etat=cha.etat;
-		i++;
-		fscanf(fe,"%d %s",&cha.etat,cha.num);
-	}
-	return i;
 }

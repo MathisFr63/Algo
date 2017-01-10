@@ -7,4 +7,3 @@ void modif(int tabM[], int tabC[],int nbmat);
 void save(int tabM[], int tabC[],int nbmat);
 int newmat(int tabM[],int tabC[],int nbmat,int tailletab);
 int suppr(int tabM[],int tabC[],int nbmat);
-void decaler(int tab[],int pos,int nbmat);

@@ -5,11 +5,9 @@ typedef struct{
 	char nom[21];
 	char code[6];
 	float moy;
-}Resultat;
+}RESULTAT;
 
-Resultat lireResultat(FILE *fe);
-Resultat * chargeTResultat(char *nomfich,int *nbres);
-void afficheT(Resultat tRes[],int nbres);
+RESULTAT lireResultat(FILE *fe);
+RESULTAT * chargeTresultat(char *nomfich,int *nbres);
+void afficheT(RESULTAT tRes[],int nbres);
 int test(void);
-void sauveTResultats(Resultat *tres,int nbres);
-Resultat *restaureTresultat(char *nomfich, int nbres);

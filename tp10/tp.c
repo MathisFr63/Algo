@@ -2,16 +2,15 @@
 #include "tp.h"
 #include <stdlib.h>
 
-
-Resultat lireResultat(FILE *fe){
-	Resultat r;
+RESULTAT lireResultat(FILE *fe){
+	RESULTAT r;
 	fscanf(fe,"%s %s %f",r.nom,r.code,&r.moy);
 	return r;
 }
 
-Resultat * chargeTResultat(char *nomfich,int *nbres){
+RESULTAT * chargeTresultat(char *nomfich,int *nbres){
 	FILE *fe=fopen(nomfich,"r");
-	Resultat * tRes;
+	RESULTAT * tRes;
 	int i;
 
 	if(fe==NULL){
@@ -21,19 +20,19 @@ Resultat * chargeTResultat(char *nomfich,int *nbres){
 	}
 
 	fscanf(fe,"%d",nbres);
-	tRes=(Resultat *)malloc(*nbres * sizeof(Resultat));
+	tRes=(RESULTAT *)malloc(*nbres * sizeof(RESULTAT));
 	if (tRes==NULL){
 		printf("Problème de Mémoire !\n");
 		exit(1);
 	}
-	for (i=0;i<*nbres;i++){
+	for (i=0;i<*nbres && i<10;i++){
 		tRes[i]=lireResultat(fe);
 	}
 	fclose(fe);
 	return tRes;
 }
 
-void afficheT(Resultat tRes[],int nbres){
+void afficheT(RESULTAT tRes[],int nbres){
 	int i;
 
 	printf("Nom\tCode\tMoyenne\n");
@@ -44,43 +43,19 @@ void afficheT(Resultat tRes[],int nbres){
 
 int test(void){
 	char nomfich[20];
-	Resultat *tRes[10];
+	RESULTAT *tabr[10];
 	int nbres,i;
 
 	printf("Quel est le nom du fichier dans lequel se trouve vos données ?");
 	scanf("%s",nomfich);
-	*tRes=chargeTResultat(nomfich,&nbres);
+	printf("Nom du fichier : %s\n",nomfich);
+	*tabr=chargeTresultat(nomfich,&nbres);
 	if (nbres<0){
 		return -1;
 	}
-	sauveTResultats(*tRes,nbres);
-	free(*tRes);
-	*tRes=restaureTresultat(nomfich,nbres);
-	afficheT(*tRes,nbres);
-	free(*tRes);
-	return 0;
-}
-
-void sauveTResultats(Resultat *tres,int nbres){
-	FILE *fe=fopen("save.don","wb");
-
-	fprintf(fe,"%d\n",nbres);
-	fwrite(tres,sizeof(Resultat),nbres,fe);
-	fclose(fe);
-}
-
-Resultat *restaureTresultat(char *nomfich, int nbres){
-	FILE *fe=fopen("save.don","rb");
-	Resultat *tres;
-
-	fscanf(fe,"%d ",&nbres);
-	tres=(Resultat *)malloc(nbres * sizeof(Resultat));
-	if (tres==NULL){
-		printf("Problème de Mémoire !\n");
-		fclose(fe);
-		exit(1);
+	afficheT(*tabr,nbres);
+	for (i=0;i<nbres;i++){
+		free(tabr[i]);
 	}
-	fread(tres,sizeof(Resultat),nbres,fe);
-	fclose(fe);
-	return tres;
+	return 0;
 }

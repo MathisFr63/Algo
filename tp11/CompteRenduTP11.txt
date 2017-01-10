@@ -195,6 +195,37 @@ int comparaison(char mot1[],char mot2[]){
 	}
 }
 
+
+//
+// Cette fonction ne fonctionne pas correctement et n'est pas terminée !
+//
+
+
+int baguenaudier(int *tab,int n,int *i,int *j){
+	printf("i = %d | n= %d\n",*i,n);
+	// Probleme lorsque tab[n-1]=n pour toutes les cases (exemples : tab[5]={1,2,3,4,5}) 
+	// --> la fonction renvoi *i=0 tout le temps même si les cases ont un pion et se termine 
+	// donc en disant que le pion peut être poser ou enlever
+	if(tab[n-1]==n && tab[n-2]==n-1){
+		*i=0;
+		n=n-1;
+	}
+	if(n>1 && *i==0){
+		baguenaudier(tab,n-1,i,j);
+		if(tab[n-2]==0 && *j==1)
+			return;
+		else{
+			*j=-1;
+			*i=-1;
+		}
+	}
+	if(*i==0){
+		printf("On peut enlever le pion car la case immédiatement à gauche a un pion et c'est le seul pion à gauche\n");
+		// Ici tab[n-1] (où n vaut 5 si on résoud un baguenaudier à 5 points)
+		//sera modifier et vaudra maintenant 0 ce qui veut dire qu'il n'y a pas de pion dans la case
+	}
+}
+
 --------------------------------------------------------------------------------------------------------------
 
 testtp.c
@@ -280,5 +311,21 @@ int main(void){
 	// char mot1[20]="bonjourtest",mot2[20]="voyons",mot3[40];
 	// concat(mot1,mot2,mot3);
 	// printf("%s\n",mot3);
+	
+-------------------------------------------------------
+-------------------------------------------------------
+
+//BAGUENAUDIER ( NE FONCTIONNE PAS ! )
+	// int tab[5]={1,2,3,4,5},n=5,i=1,j=1;
+	// baguenaudier(tab,n,&i,&j);
+	// if(i==0){
+	// 	tab[n-1]=0;
+	// }
+	// for(i=0;i<n;i++)
+	// 	printf("%d;",tab[i]);
+	// printf("\n");
+
+	return 0;
+}
 
 --------------------------------------------------------------------------------------------------------------
